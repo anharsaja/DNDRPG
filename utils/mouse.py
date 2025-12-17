@@ -13,8 +13,12 @@ def handle_mouse(event, x, y):
         for bx, by, bw, bh, label in menu_buttons_rect:
             if bx <= x <= bx + bw and by <= y <= by + bh:
                 if label == "New Adventure":
-                    state.mode = "CHARACTER_SELECT"
+                    # Switch to on-screen name entry mode
+                    state.name_buffer = ""
+                    state.mode = "ENTER_NAME"
                 elif label == "Exit":
+                    exit()
+                elif label == "Load Game":
                     exit()
 
     # CHARACTER SELECT
@@ -24,3 +28,13 @@ def handle_mouse(event, x, y):
                 state.selected_character = char["name"]
                 state.player = create_player(char["name"])
                 print("Player created:", state.player.name)
+                # If there is an active save, update it with the chosen character
+                if state.current_save:
+                    from save import load as save_load
+                    try:
+                        save_load.update_save(state.current_save, {"character": char["name"]})
+                        print(f"Updated save '{state.current_save}' with character {char['name']}")
+                    except Exception as e:
+                        print("Failed updating save:", e)
+                # After choosing character, go to tutorial
+                state.mode = "TUTORIAL"
