@@ -13,6 +13,10 @@ rpg_game/
 │   ├── __init__.py
 │   └── state.py            # game state (mode, selected_character)
 │
+├── save/
+│   ├── load.py
+│   ├── ...(player data)
+│
 ├── data/
 │   ├── __init__.py
 │   └── characters.py       # character data
