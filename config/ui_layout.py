@@ -1,0 +1,9 @@
+from config.settings import WIDTH, HEIGHT
+
+TITLE_Y = 90
+
+CHAR_AREA_Y = 160
+CHAR_AREA_H = 380
+
+PLAYER_INFO_Y = 580
+PLAYER_INFO_H = 160
